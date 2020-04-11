@@ -1,0 +1,16 @@
+.jumbotron {
+    text-align: center;
+    color: burlywood;
+}
+
+h1 {
+    text-shadow: 2px 2px 5px red;
+}
+
+#puzzleDisplay {
+    font-size: 28px;
+}
+
+newDiv {
+    float: left;
+}

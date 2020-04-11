@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +11,11 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
     <!-- We need to bring in the bootstrap CSS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
     <!-- Latest compiled and minified CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-LV/SIoc08vbV9CCeAwiz7RJZMI5YntsH8rGov0Y2nysmepqMWVvJqds6y0RaxIXT" crossorigin="anonymous">
-        
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-R/oa7KS0iDoHwdh4Gyl3/fU7pgvSCt7oyuQ79pkw+e+bMWD9dzJJa+Zqd+XJS0AD" crossorigin="anonymous">
     <!-- link to font to use in styling -->
-    <script src="assets/javascript/game.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/images">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
@@ -28,17 +24,64 @@
 
 <body>
 
+
     <div class="jumbotron">
 
-    <div class="container">
-        
-                <h1>WORDS OF FORTUNE!!!</h1>
+        <div class="container-fluid">
 
-            
+            <h1>WORDS OF FORTUNE!!!</h1>
+
+            <br>
+
+            <div class="card text-white bg-primary">
+                <h5 class="card-header"> Puzzle Category:
+                    <span id="category">TBD</span>
+                </h5>
+                <div class="card-body">
+
+                    <p class="card-text" id="puzzleDisplay"></p>
+
+                </div>
+
             </div>
-            </div>
-            
-                
-            </body>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+
+            <table class="table table-hover">
+
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">Letters Guessed</th>
+                        <th scope="col">Guesses Remaining</th>
+                        <th scope="col">Wins</th>
+                        <th scope="col">Losses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-danger">
+                        <td id="lettersGuessed"></td>
+                        <td id="guessesRemaining">15</td>
+                        <td id="wins">0</td>
+                        <td id="losses">0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="col-md-4"></div>
+
+    </div>
+
+    <script src="assets/javascript/game.js" type="text/javascript"></script>
+</body>
+
 </html>
-
