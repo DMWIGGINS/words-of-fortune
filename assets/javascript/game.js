@@ -32,29 +32,36 @@ var puzzlesSelection = [puzzles.p1, puzzles.p2, puzzles.p3, puzzles.p4, puzzles.
 function newGame() {
 
     // randomly select new puzzle from puzzle object index (0-9)
+
     currentPuzzle = Math.floor(Math.random() * 10);
 
     console.log(currentPuzzle);
 
     // display category of puzzle on screen
+
     document.querySelector("#category").innerHTML = puzzlesSelection[currentPuzzle][0];
 
 
     // test to see how long the puzzle is including spaces between words
+
     dashesandSpaces = puzzlesSelection[currentPuzzle][1].length;
     console.log(dashesandSpaces);
 
     // grab div where we will disply the unsolved puzzle
+
     var targetDiv = document.getElementById("puzzleDisplay");
 
     // create div to append after filling with the corresponding number of blank rectangles and spaces of the chosen puzzle
+
     var puzzleDiv = document.createElement("div");
 
     // test to make sure we are collecting the correct amount of letters and spaces in the correct order from our puzzle string
+
     var letterCounter = 0;
     var spaceCounter = 0;
 
     // loop through the puzzle string the correct number of times based on the puzzle length
+
     for (i = 0; i < dashesandSpaces; i++) {
 
         // if the character is a space, create a spaceDiv and append to our puzzleDiv
@@ -71,7 +78,7 @@ function newGame() {
             console.log("It's a space");
 
             // if the character is a letter, create a letterDiv and append to our puzzleDiv
-            // add a _ to our unsolved Puzzle array to mark the letter
+            // add a _ to our unsolved Puzzle array to markhold the place for the letter
 
         } else if (puzzlesSelection[currentPuzzle][1].charAt(i) !== " ") {
             unsolvedPuzzle.push("_");
@@ -88,6 +95,7 @@ function newGame() {
     }
 
     // confirm that our unsolvedPuzzle has the correct number of * and _ in the correct position
+
     console.log(unsolvedPuzzle);
 
     console.log("LetterCounter = " + letterCounter);
@@ -95,6 +103,7 @@ function newGame() {
 
 
     // send our puzzle display to the user by appending to the targetDiv that we pulled from the HTML
+
     targetDiv.appendChild(puzzleDiv);
 
 };
@@ -102,31 +111,63 @@ function newGame() {
 
 
 
+// actions to take when the user presses a key
 
 document.onkeyup = function(event) {
+
+    // convert all letters to uppercase to compare to the solutions which are all uppercase
+
     var userGuess = event.key.toUpperCase();
+
+    // establish letterInPuzzle variable and set it to false
+    // this variable will be used to track whether a letter is in the puzzle or not
+
     var letterInPuzzle = false;
     console.log(userGuess)
+
+    // take the users guess and compare it to each character in the puzzle to see if it matches
+
     for (i = 0; i < puzzlesSelection[currentPuzzle][1].length; i++) {
+
+        // if the user guess is found in the puzzle then set letterInPuzzle variable to true 
+
         if (puzzlesSelection[currentPuzzle][1].charAt(i) === userGuess) {
             unsolvedPuzzle[i] = userGuess;
             letterInPuzzle = true;
             console.log(letterInPuzzle);
+
+            // send matched letter to the HTML to be revealed
+
             document.getElementById(i).innerHTML = userGuess;
             console.log("index is " + unsolvedPuzzle.indexOf("_"));
+
+            // check to see if there are any _ left in the array 
+            // if there are no _ left than the index is -1 and user has solved the puzzle
+
             if (unsolvedPuzzle.indexOf("_") === -1) {
+
+                // add 1 to the wins tally
 
                 wins++;
                 document.getElementById("wins").innerHTML = wins;
             }
         }
     }
+    // if the user guess is not matched in the puzzle then the letterInPuzzle variable will still be false
+
     if (letterInPuzzle === false) {
         console.log(letterInPuzzle);
+
+        // incorrect guesses are updated in our lettersGuessed array and sent to the user view
+        // guessesRemaining is decreased by 1
+
         lettersGuessed.push(userGuess);
         guessesRemaining = guessesRemaining - 1;
         document.getElementById("lettersGuessed").innerHTML = lettersGuessed.join(",");
         document.getElementById("guessesRemaining").innerHTML = guessesRemaining;
+
+        // check to see if guessesRemaining has reached 0 ending the game in a loss and adding 1 to the loss tally
+
         if (guessesRemaining === 0) {
             losses++;
             document.getElementById("losses").innerHTML = losses;
@@ -137,13 +178,11 @@ document.onkeyup = function(event) {
 
         // test to see if it is the end of the game
     }
-
-
-
 };
 
 
 // prompt user to start the game
+
 alert("Press any key to play!");
 
 
