@@ -21,7 +21,6 @@
 
 </head>
 
-
 <body>
 
 
@@ -32,7 +31,46 @@
             <h1>WORDS OF FORTUNE!!!</h1>
 
             <br>
-
+            <div class="modal" id="winnerModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">You Won!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>CONGRATULATIONS!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="newGame()" data-dismiss="modal">Play
+                                Again</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Done for Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="loserModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">You lost!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Better Luck Next Time!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="newGame()" data-dismiss="modal">Play
+                                Again</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Done for Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card text-white bg-primary">
                 <h5 class="card-header"> Puzzle Category:
                     <span id="category">TBD</span>
@@ -40,47 +78,20 @@
                 <!-- <div class="card-body"> -->
 
                 <!-- <p class="card-text" id="puzzleDisplay"> -->
+
                 <div id="puzzleDisplay">
-                    <!-- <p>
-                        <div class="word">
-                            <div class="dis"></div>
-                            <div class="dis">E</div>
-                            <div class="dis">T</div>
-                            <div class="dis">R</div>
-                            <div class="dis">O</div>
-                            <div class="dis">I</div>
-                            <div class="dis">T</div>
-                            <div class="space">**</div>
-                        </div>
 
-                        <div id="word">
-                            <div class="dis">M</div>
-                            <div class="dis">I</div>
-                            <div class="dis">C</div>
-                            <div class="dis">H</div>
-                            <div class="dis">I</div>
-                            <div class="dis">G</div>
-                            <div class="dis">A</div>
-                            <div class="dis">N</div>
-                        </div>
-                    </p> -->
                 </div>
-                <!-- </div> -->
             </div>
-
-
         </div>
-
     </div>
 
     <div class="row">
 
         <div class="col-md-4"></div>
 
-        <div class="col-md-4">
 
-            <!-- <h6>Type letter here</h6>
-            <p id="letterGuess"></p> -->
+        <div class="col-md-4">
 
             <table class="table table-hover">
 

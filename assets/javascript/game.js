@@ -1,14 +1,13 @@
 var wins = 0;
 var losses = 0;
 var playerGuess = "";
-var guessesRemaining = 15;
+var guessesRemaining = 10;
 var newPuzzle = [];
 var dashesandSpaces = 0;
 var unsolvedPuzzle = [];
 var puzzleProgress = [];
 var lettersGuessed = [];
-
-
+var allLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
 
 var puzzles = {
@@ -27,9 +26,29 @@ var puzzles = {
 
 var puzzlesSelection = [puzzles.p1, puzzles.p2, puzzles.p3, puzzles.p4, puzzles.p5, puzzles.p6, puzzles.p7, puzzles.p8, puzzles.p9, puzzles.p10];
 
-
+// set up game display
 
 function newGame() {
+
+
+    guessesRemaining = 10;
+    dashesandSpaces = 0;
+    unsolvedPuzzle = [];
+    puzzleProgress = [];
+    lettersGuessed = [];
+    // losses = 0;
+    // wins = 0;
+
+    // document.getElementById("losses").innerHTML = losses;
+    // document.getElementById("wins").innerHTML = wins;
+
+    document.getElementById("lettersGuessed").innerHTML = lettersGuessed.join("");
+    document.getElementById("guessesRemaining").innerHTML = guessesRemaining;
+
+
+    var puzzleDiv = document.getElementById("puzzleDisplay");
+    document.getElementById("puzzleDisplay").innerHTML = null;
+
 
     // randomly select new puzzle from puzzle object index (0-9)
 
@@ -49,11 +68,10 @@ function newGame() {
 
     // grab div where we will disply the unsolved puzzle
 
-    var targetDiv = document.getElementById("puzzleDisplay");
 
     // create div to append after filling with the corresponding number of blank rectangles and spaces of the chosen puzzle
 
-    var puzzleDiv = document.createElement("div");
+    // var puzzleDiv = document.createElement("div");
 
     // test to make sure we are collecting the correct amount of letters and spaces in the correct order from our puzzle string
 
@@ -70,6 +88,9 @@ function newGame() {
         if (puzzlesSelection[currentPuzzle][1].charAt(i) === " ") {
             spaceCounter++;
             unsolvedPuzzle.push("*");
+            if (i !== 0) {
+                puzzleDiv.appendChild(wordDiv);
+            }
             var spaceDiv = document.createElement("div");
             spaceDiv.innerHTML = " ";
             spaceDiv.setAttribute("class", "space");
@@ -83,11 +104,16 @@ function newGame() {
         } else if (puzzlesSelection[currentPuzzle][1].charAt(i) !== " ") {
             unsolvedPuzzle.push("_");
             letterCounter++;
+            if ((i === 0) || unsolvedPuzzle[i - 1] === "*") {
+                console.log(i - 1);
+                var wordDiv = document.createElement("div");
+                wordDiv.setAttribute("class", "word");
+            }
             var letterDiv = document.createElement("div");
             letterDiv.innerHTML = "";
             letterDiv.setAttribute("class", "dis");
             letterDiv.setAttribute("ID", i);
-            puzzleDiv.appendChild(letterDiv);
+            wordDiv.appendChild(letterDiv)
             console.log("It's a letter");
         }
 
@@ -104,11 +130,9 @@ function newGame() {
 
     // send our puzzle display to the user by appending to the targetDiv that we pulled from the HTML
 
-    targetDiv.appendChild(puzzleDiv);
+    puzzleDiv.appendChild(wordDiv);
 
 };
-
-
 
 
 // actions to take when the user presses a key
@@ -118,6 +142,11 @@ document.onkeyup = function(event) {
     // convert all letters to uppercase to compare to the solutions which are all uppercase
 
     var userGuess = event.key.toUpperCase();
+
+    if (allLetters.indexOf(userGuess) === -1) {
+        alert("That was not a valid letter. Please try again.");
+        return
+    }
 
     // establish letterInPuzzle variable and set it to false
     // this variable will be used to track whether a letter is in the puzzle or not
@@ -150,6 +179,7 @@ document.onkeyup = function(event) {
 
                 wins++;
                 document.getElementById("wins").innerHTML = wins;
+                $("#winnerModal").modal("show");
             }
         }
     }
@@ -171,6 +201,7 @@ document.onkeyup = function(event) {
         if (guessesRemaining === 0) {
             losses++;
             document.getElementById("losses").innerHTML = losses;
+            $("#loserModal").modal("show");
         }
         console.log("Guesses remaining: " + guessesRemaining);
         console.log("Puzzle with correct guesses: " + unsolvedPuzzle);
