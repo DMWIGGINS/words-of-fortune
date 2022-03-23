@@ -1,0 +1,3 @@
+Make is so the random array picker knows not to pick the same puzzle more than once in the same player session.
+Letter board?  Cross off each letter as it's picked to make it easier for the player to keep track.
+Have an alert that tells how many of the letter is in the puzzle or to say "Sorry that letter is not in the puzzle.
